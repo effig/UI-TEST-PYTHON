@@ -26,7 +26,7 @@ def test_verify_link_text(setup):
     link_element = setup.find_element(By.XPATH, f"//*[@id=mm-root]/header/div/div[1]/nav/div/ul/li[1]/a/span='{link_text_to_verify}']")
 
     # Step 2: Assertion: Verify link text
-    assert link_element.text == link_text_to_verify
+    assert link_element.text == link_text_to_verify #expected result
 
 
 
@@ -38,14 +38,14 @@ def test_link_text_clickable(setup):
     link_xpath = f"//*[@id=mm-root]/header/div/div[1]/nav/div/ul/li[1]/a/span(), '{link_text}')]"
     link_element = setup.find_element(By.XPATH, link_xpath)
 
-    # Step 2: Assert that the link is clickable
-    assert link_element.is_displayed() and link_element.is_enabled()
+    # Assert that the link is clickable
+    assert link_element.is_displayed() and link_element.is_enabled() #expected result 1
 
-    # Step 3: Click on the link
+    # Step 2: Click on the link
     link_element.click()
 
-    # Step 4: Verify the new page title
-    WebDriverWait(setup, 10).until(EC.title_contains("Football News"))
+    #  Verify the new page title
+    WebDriverWait(setup, 10).until(EC.title_contains("Football News")) #expected result 2
 
 
 
@@ -60,14 +60,14 @@ def test_hover_effect_and_title_click(setup):
     actions.move_to_element(link_element).perform()
     title1_xpath = "//SomeElement, 'Fixtures')]"
 
-    # Step 2: Assert a title which is visible after the hover action
-    assert setup.find_element(By.XPATH, title1_xpath).is_displayed()
+    # Assert a title which is visible after the hover action
+    assert setup.find_element(By.XPATH, title1_xpath).is_displayed() #expected result 1
 
-    # Step 4: Click on the  'Fixtures' link
+    # Step 2: Click on the  'Fixtures' link
     title1_xpath.click()
 
-    # Step 5: Verify the new page title
-    WebDriverWait(setup, 10).until(EC.title_contains("Premier League fixtures: 2023/24 season"))
+    # Verify the new page title
+    WebDriverWait(setup, 10).until(EC.title_contains("Premier League fixtures: 2023/24 season")) #expected result 2
 
 
 #Scenario 4: Verify Responsiveness  on resized page, user will not see the header links, he will get the 'Hamburder' element    
@@ -78,19 +78,19 @@ def test_link_not_present_resized_page(setup):
     link_xpath = f"//*[@id=mm-root]/header/div/div[1]/nav/div/ul/li[1]/a/span(), '{link_text}')]"
     link_element = setup.find_element(By.XPATH, link_xpath)
 
-    # Step 2: Verify that the link is present before resizing
-    assert link_element.is_displayed(), "Link is  present before resizing"
+    # Verify that the link is present before resizing
+    assert link_element.is_displayed(), "Link is  present before resizing" #expected result 1
 
-    # Step 3: Resize the browser window
+    # Step 2: Resize the browser window
     driver = webdriver.Chrome()
     driver.set_window_size(800, 600)  #  desired window size
 
-    # Step 4: Verify that the link is not present after resizing
-    assert not link_element.is_displayed(), "Link is not present after resizing"
+    # Verify that the link is not present after resizing
+    assert not link_element.is_displayed(), "Link is not present after resizing" #expected result 2
 
-    # Step 5: Verify 'Hamburger' elememnt is present after resize
+    # Verify 'Hamburger' elememnt is present after resize
     element_after_resize = setup.find_element(By.XPATH, "//*[@id=mm-root]/header/div/div[1]/div[1]/div")
-    assert element_after_resize.is_displayed(), "Element is displayed after resizing"
+    assert element_after_resize.is_displayed(), "Element is displayed after resizing" #expected result 3
 
     
 
